@@ -1,75 +1,50 @@
-const { describe } = require("mocha");
+import { describe } from 'mocha';
+import LogoPage from '../pageobjects/logoPage.page'
 
-describe('testing logo form', ()=>{ 
-
-    beforeEach(async () => {
-        await browser.url('https://www.mrk-bsuir.by/ru') //display main 
-    })
+describe('E2E testing logo form', ()=>{  
 
     it('logo should be displayed and after click go to main page ',async() => {
-
-        const logo = $('#logo-image');
-        await expect(logo).toBeDisplayed();
-        await expect(logo).toBeClickable();
-        await logo.click();
-        await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/ru');       
-    
+        await LogoPage.open()
+        await expect(LogoPage.leftLogo).toBeDisplayed();
+        await expect(LogoPage.leftLogo).toBeClickable(); 
+        await LogoPage.clickOnLeftLogo();       
+        await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/ru');      
     })
 
-    it('БГУИР link should be displayed and clickable ',async() => {
-
-        const BSUIRlink =  $('//*[@id="logo-text"]/a');
-        await expect(BSUIRlink).toBeDisplayed();
-        await BSUIRlink.click();
-        // console.log(expect(browser).toHaveUrl('https://www.mrk-bsuir.by/ru'));
+    it('БГУИР link should be displayed and clickable ',async() => {        
+        await expect(LogoPage.collegeName).toBeDisplayed();
+        await LogoPage.clickOnCollegeName();        
         await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/ru');
-    });  
+    });      
 
-    it('college name should be displayed',async()  =>{
-
-        const collegeName = $('//*[@id="logo-text"]/div');        
-        await expect(collegeName).toBeDisplayed()            
-    })
-
-    it('change page and language on click link "English"',async()  =>{
-
-        const engLink = $('//*[@id="lang"]/div/ul/li[2]/a');        
-        await expect(engLink).toBeDisplayed()  
-        await engLink.click();
+    it('change page and language on click link "English"',async()  =>{              
+        await expect(LogoPage.englishLanguageLink).toBeDisplayed()  
+        await LogoPage.changeLanguageEnglish()
         await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/en');       
     })
-
-    it('change page and language on click link "English"',async()  =>{
-
-        const engLink = $('//*[@id="lang"]/div/ul/li[2]/a');        
-        await expect(engLink).toBeDisplayed()  
-        await engLink.click();
-        await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/en');       
-    })    
+       
 
     it('change page and language on click link "Русский"',async()  =>{
-
-        const ruLink = $('//*[@id="lang"]/div/ul/li[1]/a');        
-        await expect(ruLink).toBeDisplayed()  
-        await ruLink.click();
+         
+        await expect(LogoPage.russianLanguageLink).toBeDisplayed()  
+        await LogoPage.changeLanguageRussian();
         await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/ru');       
+    })   
+
+    // it('should display banner first slide',async() =>{
+    //     await expect (LogoPage.firstBannerPage).toBeDisplayed();
+    //     await LogoPage.clickOnFirstBannerLink();
+    //     await expect(LogoPage.firstBannerImage).toBeDisabled();
+
+    // })
+    it('should change page after click on second banner slide', async() =>{
+        await LogoPage.clickOnSecondBannerLink();
+        await expect (LogoPage.secondBannerPage).toBeDisplayed();
+        await LogoPage.clickOnBannerLink();               
+        await expect(browser).toHaveUrl('https://mrk-bsuir.by/ru/content/it-shkola-mrk')
+        
     })
 
-    it('change page and language on click image "English"',async()  =>{
-
-        const engImage = $('//*[@id="lang"]/div/ul/li[2]/a/img');        
-        await expect(engImage).toBeDisplayed()  
-        await engImage.click();
-        await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/en');       
-    })
-
-    it('change page and language on click image "Русский"',async()  =>{
-
-        const ruImage = $('//*[@id="lang"]/div/ul/li[1]/a/img');        
-        await expect(ruImage).toBeDisplayed()  
-        await ruImage.click();
-        await expect(browser).toHaveUrl('https://www.mrk-bsuir.by/ru');       
-    })
 
 })
 

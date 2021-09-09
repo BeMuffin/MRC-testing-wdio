@@ -1,7 +1,9 @@
 exports.config = {
     specs: [
-        './test/specs/**/menu.spec.js',
+        // './test/specs/**/menu.spec.js',
         './test/specs/**/logo.spec.js',
+        './test/specs/**/ads.spec.js',
+
         './test/specs/**/firstPage.spec.js'
     ],
     exclude: [
@@ -20,7 +22,7 @@ exports.config = {
     
     bail: 0,
    
-    baseUrl: 'https://www.mrk-bsuir.by/ru',
+    baseUrl: 'https://www.mrk-bsuir.by',
     
     waitforTimeout: 10000,
    

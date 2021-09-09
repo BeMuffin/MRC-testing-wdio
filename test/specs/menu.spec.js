@@ -48,5 +48,41 @@ describe('testing menu ', ()=>{
         await expect (browser).toHaveUrl('https://www.mrk-bsuir.by/ru/content/istoriya-mrk')                         
     })
 
+    it('should change page on click on link "О колледже"-> "Структура колледжа"', async () =>{
+               
+        const aboutCollege = $('#main-menu > div > ul > li:nth-child(2) > a');  
+        const structureOfCollege = $('#main-menu > div > ul > li:nth-child(2) > ul > li:nth-child(2) > a');                
+        await aboutCollege.moveTo();
+        structureOfCollege.waitForDisplayed({timeout: 1000});        
+        await structureOfCollege.click();
+        await expect (browser).toHaveUrl('https://www.mrk-bsuir.by/ru/content/struktura')                         
+    })
+    it('should change page on click on link "О колледже"-> "Структурные подразделения" -> "Методисты"', async () =>{
+               
+        const aboutCollege = $('#main-menu > div > ul > li:nth-child(2) > a');  
+        const structure = $('#main-menu > div > ul > li:nth-child(2) > ul > li:nth-child(3) > a'); 
+        const metodists = $('#main-menu > div > ul > li:nth-child(2) > ul > li:nth-child(3) > ul > li.first.leaf > a')               
+        await aboutCollege.moveTo();
+        structure.waitForDisplayed({timeout: 1000});        
+        await structure.moveTo();
+        metodists.waitForDisplayed({timeout:1000});
+        await metodists.click();
+        await expect (browser).toHaveUrl('https://www.mrk-bsuir.by/ru/content/uchebno-metodicheskiy-otdel')                         
+    })
+    it('should change page on click on link "О колледже"-> "Структурные подразделения" -> "Методисты"', async () =>{
+               
+        const aboutCollege = $('#main-menu > div > ul > li:nth-child(2) > a');  
+        const structure = $('#main-menu > div > ul > li:nth-child(2) > ul > li:nth-child(3) > a'); 
+        const metodists = $('#main-menu > div > ul > li:nth-child(2) > ul > li:nth-child(3) > ul > li.first.leaf > a')               
+        await aboutCollege.moveTo();
+        structure.waitForDisplayed({timeout: 1000});        
+        await structure.moveTo();
+        metodists.waitForDisplayed({timeout:1000});
+        await metodists.click();
+        await expect (browser).toHaveUrl('https://www.mrk-bsuir.by/ru/content/uchebno-metodicheskiy-otdel')                         
+    })
+    
+
+
 
 })
